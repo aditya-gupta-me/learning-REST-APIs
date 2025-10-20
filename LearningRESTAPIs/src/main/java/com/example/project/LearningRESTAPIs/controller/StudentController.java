@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 //to create bean we use -> @RestController
 //RestController is made from two controller annotations
@@ -38,6 +39,23 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<StudentDTO> createNewStudent(@RequestBody AddStudentRequestDTO addStudentRequestDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createNewStudent(addStudentRequestDTO));
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id){
+        studentService.deleteStudentById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentDTO> updateStudent(@PathVariable Long id, @RequestBody AddStudentRequestDTO addStudentRequestDTO){
+        return ResponseEntity.ok((studentService.updateStudent(id, addStudentRequestDTO)));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<StudentDTO> updatePartialStudent(@PathVariable Long id,
+                                                     @RequestBody Map<String, Object> updates){
+        return ResponseEntity.ok((studentService.updatePartialStudent(id, updates)));
     }
 }
