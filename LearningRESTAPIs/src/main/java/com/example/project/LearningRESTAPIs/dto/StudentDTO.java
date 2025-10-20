@@ -8,12 +8,14 @@ package com.example.project.LearningRESTAPIs.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //the below annotation is used to create boilerplate for
 //constructor, getters & setters, hashCode etc. methods
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class StudentDTO {
     private Long id;
     private String name;
